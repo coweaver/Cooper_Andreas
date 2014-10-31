@@ -7,6 +7,7 @@ app=Flask(__name__)
 @app.route("/", methods=["GET","POST"])
 @app.route("/login", methods=["GET","POST"])
 def login():
+    print_Everything()
     if request.method=="GET":
         return render_template("login.html")
     else:
@@ -17,7 +18,7 @@ def login():
             return render_template("login.html", error="Not a valid Email or Password")
         else:
             name = getName(email)
-            return render_template(Home.html,name=name)
+            return render_template("home.html",name=name)
 
 
 @app.route("/register", methods=["GET","POST"])
@@ -28,12 +29,12 @@ def register():
         email = request.form["usermail"]
         pword = request.form["pword"]
         name = request.form["name"]
-        valid_email = checkEmail(email)
+        valid_email = not checkEmail(email)
         if not(valid_email):
             error = "Email Already Exists"
             return render_template("register.html", error=error)
         add(name,email,pword)
-        return redirect(url_for(login))
+        return redirect(url_for("/login"))
 
 
 

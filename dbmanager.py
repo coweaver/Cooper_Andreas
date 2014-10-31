@@ -33,3 +33,10 @@ def add(name, email, password):
     posts.insert({"name": name, "user": email, "pword": password})
     
     
+def print_Everything():
+    client = MongoClient()
+    db = client.users
+    print "Printing everything"
+    for posts in db.posts.find():
+            print posts
+            
