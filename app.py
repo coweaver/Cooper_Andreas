@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from dbmanager import *
 
 
@@ -14,7 +14,7 @@ def login():
         pword = request.form["pword"]
         valid = authenticate(email,pword)
         if not(valid):
-            return render_template("login.html")
+            return render_template("login.html", error="Not a valid Email or Password")
         else:
             name = getName(email)
             return render_template(Home.html,name=name)
@@ -32,6 +32,8 @@ def register():
         if not(valid_email):
             error = "Email Already Exists"
             return render_template("register.html", error=error)
+        add(name,email,pword)
+        return redirect(url_for(login))
 
 
 
