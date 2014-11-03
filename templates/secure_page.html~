@@ -1,0 +1,6 @@
+{% if name != None %}
+You are logged in, {{name}}!
+
+{% else %}
+You are not logged in. Please log in.
+{% endif %}

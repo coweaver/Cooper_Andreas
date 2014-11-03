@@ -1,4 +1,8 @@
+{% extends "page_template.html" %}
+
+
 <html>
+{% block bodyContent %}
 {{error}}
 <form name="login"  method="POST">    
   <label for="usermail">Email</label>
@@ -15,7 +19,7 @@
   <input type="submit" value="Register">
   
 </form>  
-
+{% endblock bodyContent %}
 
 
 </html>

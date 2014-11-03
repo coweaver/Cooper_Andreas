@@ -1,6 +1,9 @@
-<html>
-{{error}}
+{% extends "page_template.html" %}
 
+
+<html>
+{% block bodyContent %}
+{{error}}
 <form name="login"  method="POST">    
         <label for="usermail">Email</label>  
         <input type="email" name="usermail" placeholder="yourname@email.com" required></li>  
@@ -11,6 +14,7 @@
         <input type="submit" value="Login"></li>  
 </form>  
 
+{% endblock bodyContent %}
 
 
 </html>
