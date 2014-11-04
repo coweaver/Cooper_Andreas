@@ -51,9 +51,7 @@ def logout():
     session.pop('n',None)
     return redirect("/")
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
+
 if __name__=="__main__":
     app.secret_key="This is a secret key"
     app.debug=True
