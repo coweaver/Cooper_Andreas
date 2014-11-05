@@ -5,6 +5,11 @@ from dbmanager import *
 app=Flask(__name__)
 
 @app.route("/", methods=["GET","POST"])
+def public():
+    if  'n' not in session:
+        session['n'] = None
+    return render_template("public.html", name = session['n'])
+
 @app.route("/login", methods=["GET","POST"])
 def login():
     if  'n' not in session:
