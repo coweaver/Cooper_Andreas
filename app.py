@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from dbmanager import *
 
-
 app=Flask(__name__)
 
-@app.route("/", methods=["GET","POST"])
-def public():
-    if  'n' not in session:
+
+@app.route("/profile")
+def profile():
+    if 'n' not in session:
         session['n'] = None
-    return render_template("public.html", name = session['n'])
+    return render_template("profile.html", name = session['n'])
+
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -56,9 +57,11 @@ def logout():
     session.pop('n',None)
     return redirect("/")
 
+@app.route("/", methods=["GET","POST"])
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 if __name__=="__main__":
     app.secret_key="This is a secret key"
     app.debug=True
