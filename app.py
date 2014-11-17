@@ -3,11 +3,18 @@ from dbmanager import *
 
 app=Flask(__name__)
 
-
+def login_required(func):
+    def inner(*args):
+        if 'n' not in session:
+            session['n'] = None
+        if session['n'] is None:
+            return redirect(url_for('about'))
+        else: 
+            return func(*args)
+    return inner
 @app.route("/profile")
+@login_required
 def profile():
-    if 'n' not in session:
-        session['n'] = None
     return render_template("profile.html", name = session['n'])
 
 
@@ -47,9 +54,8 @@ def register():
 
     
 @app.route("/secure_page", methods = ["GET", "POST"])
+#@login_required
 def secure_page():
-    if 'n' not in session:
-        session['n'] = None
     return render_template("secure_page.html", name = session['n'])
 
 @app.route("/logout")
